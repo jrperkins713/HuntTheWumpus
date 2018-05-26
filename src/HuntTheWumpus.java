@@ -16,15 +16,14 @@ public class HuntTheWumpus{
 			lastPos[0] = playerPos[0];
 			lastPos[1] = playerPos[1];
 			while(lastCode == code){
-
 				code = grid.getCode();
-				//program was going to fast. This is some slow down code
-				int durp;
-					for(int i=0;i<1000;i++)
-				durp = 1;
+				try {
+					Thread.sleep(100);
+				}
+				catch(Exception e) {
 
+				}
 			}
-			System.out.println("Start");
 			lastCode = code;
 			switch(code){
 				case 87:
@@ -44,12 +43,6 @@ public class HuntTheWumpus{
 						playerPos[1]++;
 					break;
 			}
-			//program was going to fast. This is some slow down code
-			int durp;
-			for(int i=0;i<1000;i++)
-				durp = 1;
-
-
 
 			if(lastPos[0]!=playerPos[0]||lastPos[1]!=playerPos[1]){
 				System.out.println("Moved to ("+(1+playerPos[1])+", "+(5-playerPos[0])+")");
@@ -60,7 +53,6 @@ public class HuntTheWumpus{
 				for(int j=-1;j<2;j++){
 					temp[0]=playerPos[0]+i;
 					temp[1]=playerPos[1]+j;
-					System.out.println("Pass");
 					if(samePos(temp,wumPos))
 						System.out.println("You smell a wumpus");
 				}
