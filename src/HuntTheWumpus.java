@@ -11,11 +11,11 @@ public class HuntTheWumpus{
 		int[] wumPos=randPos(), batPos=randPos(), pitPos=randPos(), arrPos=randPos(), temp = new int[2];
 		Scanner vReader = new Scanner(System.in);
 		Grid grid = new Grid();
-		grid.setColor(playerPos[1],playerPos[0],Color.red);
+		grid.setColor(playerPos[0],playerPos[1],Color.red);
 		while(true){
 			lastPos[0] = playerPos[0];
 			lastPos[1] = playerPos[1];
-			while(lastCode == code){
+			while(code == 0){
 				code = grid.getCode();
 				try {
 					Thread.sleep(100);
@@ -24,7 +24,6 @@ public class HuntTheWumpus{
 
 				}
 			}
-			lastCode = code;
 			switch(code){
 				case 87:
 					if(playerPos[0]!=0)
@@ -60,6 +59,8 @@ public class HuntTheWumpus{
 
 
 
+			code = 0;
+			System.out.println();
 		}
 
 
