@@ -5,10 +5,14 @@ import java.util.Random;
 
 public class HuntTheWumpus{
 	public static void main(String[] args){
-		int code = 0, lastCode = 0;
+		int code = 0, lastCode = 0, arrows=5;
+		boolean won = false;
 		int[] playerPos = randPos();
 		int[] lastPos = new int[2];
 		int[] wumPos=randPos(), batPos=randPos(), pitPos=randPos(), arrPos=randPos(), temp = new int[2];
+		while(samePos(playerPos,wumPos)||samePos(playerPos, batPos))
+			playerPos = randPos();
+
 		Scanner vReader = new Scanner(System.in);
 		Grid grid = new Grid();
 		grid.setColor(playerPos[0],playerPos[1],Color.red);
@@ -42,10 +46,37 @@ public class HuntTheWumpus{
 					if(playerPos[1]!=4)
 						playerPos[1]++;
 					break;
+				case 37:
+					if(shoot(playerPos, wumPos, "left"))
+						won = true;
+					arrows--;
+					break;
+				case 38:
+					if(shoot(playerPos, wumPos, "up"))
+						won = true;
+					arrows--;
+					break;
+				case 39:
+					if(shoot(playerPos, wumPos, "right"))
+						won = true;
+					arrows--;
+					break;
+				case 40:
+					if(shoot(playerPos, wumPos, "down"))
+						won = true;
+					arrows--;
+					break;
+
+			}
+			if(won){
+				System.out.println("You won!");
+				break;
 			}
 
-			if(samePos(playerPos, batPos))
+			if(samePos(playerPos, batPos)){
+				System.out.println("WOOOSH");
 				playerPos = randPos();
+			}
 
 			if(lastPos[0]!=playerPos[0]||lastPos[1]!=playerPos[1]){
 				System.out.println("Moved to ("+(1+playerPos[1])+", "+(5-playerPos[0])+")");
@@ -70,7 +101,10 @@ public class HuntTheWumpus{
 			code = 0;
 			System.out.println();
 		}
-		grid.setColor(playerPos[0],playerPos[1],Color.black);
+		if(won)
+			grid.setColor(playerPos[0],playerPos[1],new Color(255,215,0));
+		else
+			grid.setColor(playerPos[0],playerPos[1], Color.black);
 
 
 
@@ -94,5 +128,28 @@ public class HuntTheWumpus{
 			return true;
 		return false;
 	}
+
+	public static boolean shoot(int[] p, int[] w, String dir){
+		int[] shootPos = {p[0],p[1]};
+		switch(dir){
+			case "left":
+				shootPos[1]--;
+				break;
+			case "right":
+				shootPos[1]++;
+				break;
+			case "up":
+				shootPos[0]--;
+				break;
+			case "down":
+				shootPos[0]++;
+				break;
+		}
+		if(samePos(shootPos,w))
+			return true;
+		return false;
+	}
+
+
 
 }
