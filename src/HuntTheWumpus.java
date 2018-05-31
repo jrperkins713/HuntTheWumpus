@@ -12,7 +12,8 @@ public class HuntTheWumpus{
 		Scanner vReader = new Scanner(System.in);
 		Grid grid = new Grid();
 		grid.setColor(playerPos[0],playerPos[1],Color.red);
-		while(true){
+		while(!hasLost(playerPos, wumPos, pitPos)){
+
 			lastPos[0] = playerPos[0];
 			lastPos[1] = playerPos[1];
 			while(code == 0){
@@ -43,10 +44,11 @@ public class HuntTheWumpus{
 					break;
 			}
 
+			if(samePos(playerPos, batPos))
+				playerPos = randPos();
+
 			if(lastPos[0]!=playerPos[0]||lastPos[1]!=playerPos[1]){
 				System.out.println("Moved to ("+(1+playerPos[1])+", "+(5-playerPos[0])+")");
-				grid.setColor(playerPos[0],playerPos[1],Color.red);
-				grid.setColor(lastPos[0],lastPos[1],Color.pink);
 			}
 			for(int i=-1;i<2;i++){
 				for(int j=-1;j<2;j++){
@@ -54,14 +56,21 @@ public class HuntTheWumpus{
 					temp[1]=playerPos[1]+j;
 					if(samePos(temp,wumPos))
 						System.out.println("You smell a wumpus");
+					if(samePos(temp,pitPos))
+						System.out.println("You feel a breeze");
+					if(samePos(temp,batPos))
+						System.out.println("You hear flapping");
 				}
 			}
 
 
 
+			grid.setColor(lastPos[0],lastPos[1],Color.pink);
+			grid.setColor(playerPos[0],playerPos[1],Color.red);
 			code = 0;
 			System.out.println();
 		}
+		grid.setColor(playerPos[0],playerPos[1],Color.black);
 
 
 
@@ -76,6 +85,14 @@ public class HuntTheWumpus{
 		Random rand = new Random();
 		int[] temp = {rand.nextInt(5),rand.nextInt(5)};
 		return temp;
+	}
+
+	public static boolean hasLost(int[] p, int[] w, int[] pit){
+		if(samePos(p, w))
+			return true;
+		if(samePos(p, pit))
+			return true;
+		return false;
 	}
 
 }
