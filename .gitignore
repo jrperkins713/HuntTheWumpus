@@ -50,4 +50,7 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+#Is this how you do it?
 .class
+.BAT
