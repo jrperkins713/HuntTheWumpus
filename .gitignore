@@ -52,5 +52,5 @@ fabric.properties
 .idea/httpRequests
 
 #Is this how you do it?
-.class
-.BAT
+*.class
+*.BAT
