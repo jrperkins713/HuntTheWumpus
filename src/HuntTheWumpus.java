@@ -49,29 +49,30 @@ public class HuntTheWumpus{
 				case 37:
 					if(shoot(playerPos, wumPos, "left"))
 						won = true;
+					else wumPos = wumpusMove(wumPos);
 					arrows--;
 					break;
 				case 38:
 					if(shoot(playerPos, wumPos, "up"))
 						won = true;
+					else wumPos = wumpusMove(wumPos);
 					arrows--;
 					break;
 				case 39:
 					if(shoot(playerPos, wumPos, "right"))
 						won = true;
+					else wumPos = wumpusMove(wumPos);
 					arrows--;
 					break;
 				case 40:
 					if(shoot(playerPos, wumPos, "down"))
 						won = true;
+					else wumPos = wumpusMove(wumPos);
 					arrows--;
 					break;
 
 			}
-			if(won){
-				System.out.println("You won!");
-				break;
-			}
+			if(won) break;
 
 			if(samePos(playerPos, batPos)){
 				System.out.println("WOOOSH");
@@ -101,10 +102,14 @@ public class HuntTheWumpus{
 			code = 0;
 			System.out.println();
 		}
-		if(won)
+		if(won){
 			grid.setColor(playerPos[0],playerPos[1],new Color(255,215,0));
-		else
+			System.out.println("You killed the wumpus! You will forever more be known for your legendary Wumpus hunting skills");
+		}
+		else{
 			grid.setColor(playerPos[0],playerPos[1], Color.black);
+			System.out.println("You have met with a terrible fate, haven't you?");
+		}
 
 
 
@@ -122,10 +127,14 @@ public class HuntTheWumpus{
 	}
 
 	public static boolean hasLost(int[] p, int[] w, int[] pit){
-		if(samePos(p, w))
+		if(samePos(p, w)){
+			System.out.println("Oh no! You have been eaten by the Wumpus");
 			return true;
-		if(samePos(p, pit))
+		}
+		else if(samePos(p, pit)){
+			System.out.println("You fell into a bottomless pit");
 			return true;
+		}
 		return false;
 	}
 
@@ -149,6 +158,36 @@ public class HuntTheWumpus{
 			return true;
 		return false;
 	}
+
+	public static int[] wumpusMove(int[] pos){
+		Random rand = new Random();
+		int[] newPos = {-1,-1};
+		while(newPos[0]<0||newPos[0]>4||newPos[1]<0||newPos[1]>4){
+			newPos[0] = pos[0];
+			newPos[1] = pos[1];
+			double chance = rand.nextDouble();
+			if(chance<.2){
+				newPos[0] = pos[0]+1;
+				System.out.println("First");
+			}
+			else if(chance<.4){
+				newPos[0] = pos[0]-1;
+				System.out.println("Second");
+			}
+			else if(chance<.6){
+				newPos[1] = pos[1]+1;
+				System.out.println("Third");
+			}
+			else if(chance<.8){
+				newPos[1] = pos[1]-1;
+				System.out.println("Fourth");
+			}
+
+			System.out.println(chance);
+		}
+		return newPos;
+	}
+
 
 
 
