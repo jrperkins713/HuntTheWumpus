@@ -73,7 +73,10 @@ public class HuntTheWumpus{
 
 			}
 			if(won) break;
-
+			if(arrows==0){
+				System.out.println("You ran out of arrows. Your poor Wumpus hunting skills cause you to die of embarrassment");
+				break;
+			}
 			if(samePos(playerPos, batPos)){
 				System.out.println("WOOOSH");
 				playerPos = randPos();
@@ -94,6 +97,7 @@ public class HuntTheWumpus{
 						System.out.println("You hear flapping");
 				}
 			}
+			System.out.println("You have "+arrows+" arrows");
 
 
 
@@ -168,22 +172,17 @@ public class HuntTheWumpus{
 			double chance = rand.nextDouble();
 			if(chance<.2){
 				newPos[0] = pos[0]+1;
-				System.out.println("First");
 			}
 			else if(chance<.4){
 				newPos[0] = pos[0]-1;
-				System.out.println("Second");
 			}
 			else if(chance<.6){
 				newPos[1] = pos[1]+1;
-				System.out.println("Third");
 			}
 			else if(chance<.8){
 				newPos[1] = pos[1]-1;
-				System.out.println("Fourth");
 			}
-
-			System.out.println(chance);
+			//else, wumpus stays in square
 		}
 		return newPos;
 	}
