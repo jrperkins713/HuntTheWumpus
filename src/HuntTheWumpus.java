@@ -10,8 +10,10 @@ public class HuntTheWumpus{
 		int[] playerPos = randPos();
 		int[] lastPos = new int[2];
 		int[] wumPos=randPos(), batPos=randPos(), pitPos=randPos(), arrPos=randPos(), temp = new int[2];
-		while(samePos(playerPos,wumPos)||samePos(playerPos, batPos))
+		while(samePos(playerPos,wumPos)||samePos(playerPos, batPos)||samePos(playerPos, pitPos))
 			playerPos = randPos();
+		while(samePos(arrPos, pitPos)||samePos(arrPos,batPos))
+			arrPos = randPos();
 
 		Scanner vReader = new Scanner(System.in);
 		Grid grid = new Grid();
@@ -73,7 +75,7 @@ public class HuntTheWumpus{
 
 			}
 			if(won) break;
-			if(arrows==0){
+			if(arrows==0&&arrPos!=null){
 				System.out.println("You ran out of arrows. Your poor Wumpus hunting skills cause you to die of embarrassment");
 				break;
 			}
@@ -81,6 +83,12 @@ public class HuntTheWumpus{
 				System.out.println("WOOOSH");
 				playerPos = randPos();
 			}
+			if(arrPos!=null && samePos(playerPos, arrPos)){
+				System.out.println("You found the arrow of a previous hunter");
+				arrows++;
+				arrPos = null;
+			}
+
 
 			if(lastPos[0]!=playerPos[0]||lastPos[1]!=playerPos[1]){
 				System.out.println("Moved to ("+(1+playerPos[1])+", "+(5-playerPos[0])+")");
@@ -103,6 +111,8 @@ public class HuntTheWumpus{
 
 			grid.setColor(lastPos[0],lastPos[1],Color.pink);
 			grid.setColor(playerPos[0],playerPos[1],Color.red);
+			while(samePos(wumPos,batPos))
+				wumPos = wumpusMove(wumPos);
 			code = 0;
 			System.out.println();
 		}
