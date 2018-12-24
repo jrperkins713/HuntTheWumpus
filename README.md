@@ -1,6 +1,6 @@
 # Hunt The Wumpus! #
 
-
+!["Gameplay Screenshot"](HuntTheWumpusGameplay?raw=true "Title")
 
 INSTRUCTIONS
 Move charter (red square) with WASD
