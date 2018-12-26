@@ -1,8 +1,8 @@
 # Hunt The Wumpus! #
 
 BACKGROUND  
-Hunt the Wumpus is a text based game originally written by Gregory Yob in 1975. Yob's game contained twenty chambers,  
-each connected to three other. The player was given text clues based off of the contents of the adjacent chambers, with  
+Hunt the Wumpus is a text based game originally written by Gregory Yob in 1975. Yob's game contains twenty chambers,  
+each connected to three others. The player is given text clues based off of the contents of the adjacent chambers, with  
 the ultimate goal of locating the Wumpus, and firing an arrow into its chamber. To increase the difficulty, Hunt the  
 Wumpus also includes other obstacles, such as bottomless pits, and bats.  
 
