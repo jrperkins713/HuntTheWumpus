@@ -19,7 +19,7 @@ The player may pick up arrows of less successful hunters
 If the player shoots an arrow into the wrong square, the Wumpus could move to an adjacent square  
 The Wumpus is too heavy to be lifted by bats, and cannot fall into a bottomless pit.  
  
-
+SCREENSHOT
 !["Gameplay Screenshot"](HuntTheWumpusGameplay.png?raw=true "Title")
 
 
